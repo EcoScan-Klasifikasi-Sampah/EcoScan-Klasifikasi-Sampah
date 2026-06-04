@@ -25,7 +25,7 @@ Sistem server bertanggung jawab menangani RESTful API, logika bisnis, dan mempro
     python -m venv env
     Pengguna Windows: env\Scripts\activate
     Pengguna Mac/Linux: source env/bin/activate
- c. nstal seluruh library yang dibutuhkan (FastAPI, TensorFlow, psycopg2, dll.):
+ c. Instal seluruh library yang dibutuhkan (FastAPI, TensorFlow, psycopg2, dll.):
     pip install -r requirements.txt
  d. Jalankan server FastAPI:
     uvicorn main:app --reload
