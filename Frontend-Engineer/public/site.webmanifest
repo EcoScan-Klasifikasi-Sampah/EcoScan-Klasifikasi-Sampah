@@ -1,0 +1,20 @@
+{
+  "name": "EcoScan",
+  "short_name": "EcoScan",
+  "description": "Scan gambar sampah dan dapatkan kategori pemilahan dengan bantuan AI.",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ecoscan-logo-transparent.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#18b86f",
+  "background_color": "#fff8ec",
+  "display": "standalone"
+}

@@ -1,0 +1,85 @@
+# EcoScan Backend
+
+FastAPI backend untuk klasifikasi gambar sampah EcoScan, siap local development dan deploy Render.
+
+## Local
+
+```bash
+cd ecoscan-backend
+py -3.11 -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+# atau: python server.py
+```
+
+Jika Python lokal bukan 3.11, jalankan dengan Docker:
+
+```bash
+cd ecoscan-backend
+docker build -t ecoscan-api .
+docker run --env-file .env -p 8000:8000 ecoscan-api
+```
+
+## Test
+
+```bash
+py -3.11 -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+python -m pip install -r requirements-dev.txt
+python -m pytest
+```
+
+Endpoint utama:
+
+- `POST /api/v1/classify` dengan multipart field `file`
+- `GET /api/v1/search?q={keyword}`
+- `GET /api/v1/history`
+- `GET /api/v1/notifications?user_id={user_id}`
+- `PATCH /api/v1/notifications/read` dengan JSON `{"user_id":"...","notification_ids":["..."]}`
+- `GET /api/v1/users/{user_id}/stats`
+- `GET /api/v1/users/{user_id}/streak` untuk streak harian user
+- `GET /api/v1/challenges/weekly?user_id={user_id}` untuk data challenge + progres user
+- `GET /api/v1/challenges/weekly/status?user_id={user_id}`
+- `POST /api/v1/challenges/weekly/progress` dengan JSON `{"user_id":"...","increment":1}` atau `{"user_id":"...","current_count":5}`
+- `GET /api/v1/community/challenge`
+- `GET /api/v1/community/posts`
+- `POST /api/v1/community/posts`
+- `POST /api/v1/community/posts/{post_id}/comments`
+- `POST /api/v1/community/posts/{post_id}/like`
+- `GET /api/v1/community/leaderboard`
+- `GET /api/v1/trivia`
+- `PUT /api/v1/users/{user_id}`
+- `PUT /api/v1/users/{user_id}/password`
+- `POST /api/v1/auth/register`
+- `POST /api/v1/auth/login`
+- `GET /health`
+- `POST /predict` kompatibel dengan frontend lama
+
+Jika `SUPABASE_URL` dan `SUPABASE_SERVICE_ROLE_KEY` kosong, riwayat disimpan sementara di memori agar local tetap bisa dicoba.
+
+Model yang tersedia di repo saat ini memakai 5 output (`Anorganik,B3,Kertas,Organik,Residu`). Jika model tim AI diganti ke 10 kelas Garbage Classification V2, ubah `MODEL_CLASSES` menjadi:
+
+```env
+MODEL_CLASSES=clothes,glass,plastic,shoes,cardboard,paper,metal,battery,biological,trash
+```
+
+## Supabase
+
+Jalankan `sql/supabase_schema.sql` di SQL Editor Supabase. Di Render, isi:
+
+- `SUPABASE_URL`
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `CORS_ORIGINS` dengan URL frontend production
+
+## Render
+
+Deploy dari `render.yaml`, atau buat Web Service manual:
+
+- Root Directory: `ecoscan-backend`
+- Build Command: `pip install --upgrade pip && pip install -r requirements.txt`
+- Start Command: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`

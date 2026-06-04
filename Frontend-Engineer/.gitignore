@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+
+# Production build
+dist/
+build/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+vite-dev.log
+vite-dev.err.log
+
+# Cache
+.vite/
+.eslintcache
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
