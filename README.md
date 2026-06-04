@@ -19,25 +19,34 @@ git clone (https://github.com/EcoScan-Klasifikasi-Sampah/EcoScan-Klasifikasi-Sam
 
 2. Konfigurasi Back-End (FastAPI & TensorFlow)
 Sistem server bertanggung jawab menangani RESTful API, logika bisnis, dan memproses inference model Deep Learning.
- a. Masuk ke direktori backend:
+
+    a. Masuk ke direktori backend:
     cd backend
- b. Buat dan aktifkan virtual environment Python:
+
+    b. Buat dan aktifkan virtual environment Python:
     python -m venv env
     Pengguna Windows: env\Scripts\activate
     Pengguna Mac/Linux: source env/bin/activate
- c. Instal seluruh library yang dibutuhkan (FastAPI, TensorFlow, psycopg2, dll.):
+
+    c. Instal seluruh library yang dibutuhkan (FastAPI, TensorFlow, psycopg2, dll.):
     pip install -r requirements.txt
- d. Jalankan server FastAPI:
+
+   d. Jalankan server FastAPI:
     uvicorn main:app --reload
     API Server akan aktif dan dapat diakses melalui http://localhost:3000.
+
 3. Konfigurasi Front-End (React.js & Vite)
 Antarmuka pengguna (UI) dibangun agar interaktif dengan menggunakan React.js dan Vite. Komunikasi data HTTP Request dari klien ke server diimplementasikan secara langsung menggunakan fetch API bawaan JavaScript
-a. Buka tab terminal baru dan arahkan ke direktori frontend:
+
+   a. Buka tab terminal baru dan arahkan ke direktori frontend:
    cd frontend
-b. Instal dependencies Node.js:
+   
+   b. Instal dependencies Node.js:
    npm install
-c. Jalankan development server:
+   
+   c. Jalankan development server:
    npm run dev
+   
 Aplikasi front-end siap diuji coba melalui browser pada tautan http://localhost:5173.
 
 # Catatan Teknis Pengembang
